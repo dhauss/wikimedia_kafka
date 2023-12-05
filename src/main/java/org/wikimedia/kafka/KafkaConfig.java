@@ -24,7 +24,6 @@ public class KafkaConfig {
                 config_sb.append("\n");
             }
             config_fr.close();
-            System.out.println(config_sb.toString());
 
             String[] configStrings = config_sb.toString().split("\n");
 
@@ -34,7 +33,7 @@ public class KafkaConfig {
 
             String[] saslConfig = configStrings[3].split("=");
             this.setSaslJassConfig(saslConfig[1] + "=" + saslConfig[2] + "=" + saslConfig[3]);
-            System.out.println(getSaslJassConfig());
+
         } catch(IOException e){
             e.printStackTrace();
         }
