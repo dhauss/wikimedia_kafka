@@ -12,7 +12,12 @@ import java.util.concurrent.TimeUnit;
 * then reads from stream and sends message data to Kafka topic
  */
 public class WikimediaChangesProducer {
+
     public static void main(String[] args) throws InterruptedException {
+        String topic = "wikimedia.recentchange";
+        String url = "https://stream.wikimedia.org/v2/stream/recentchange";
+        int secondsToSleep = 5;
+
         // custom class for reading in data from Kafka config file
         KafkaConfig kc = new KafkaConfig("src/main/resources/config.txt");
 
@@ -22,14 +27,12 @@ public class WikimediaChangesProducer {
         props.put("sasl.mechanism", kc.getSaslMechanism());
         props.put("security.protocol", kc.getSecurityProtocol());
         props.put("sasl.jaas.config", kc.getSaslJaasConfig());
+
         props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
         props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
 
         //  create producer, define topic and secondsToSleep
         KafkaProducer<String, String> producer = new KafkaProducer<>(props);
-        String topic = "wikimedia.recentchange";
-        String url = "https://stream.wikimedia.org/v2/stream/recentchange";
-        int secondsToSleep = 5;
 
         // create event handler for reading recent changes stream from wikimedia
         EventHandler eventHandler = new WikimediaChangeHandler(producer, topic);

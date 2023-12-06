@@ -16,6 +16,7 @@ import java.util.Properties;
 * */
 public class WikimediaChangesConsumer {
     private static final Logger log = LoggerFactory.getLogger(WikimediaChangesConsumer.class.getSimpleName());
+
     public static void main(String[] args) {
         String groupID = "wikimedia-consumer";
         String topic = "wikimedia.recentchange";
