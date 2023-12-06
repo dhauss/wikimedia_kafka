@@ -7,7 +7,10 @@ import org.apache.kafka.clients.producer.KafkaProducer;
 import java.net.URI;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
-
+/*
+* defines Kafka client, creates event handler to read from wikimedia recent changes stream,
+* then reads from stream and sends message data to Kafka topic
+ */
 public class WikimediaChangesProducer {
     public static void main(String[] args) throws InterruptedException {
         // custom class for reading in data from Kafka config file
