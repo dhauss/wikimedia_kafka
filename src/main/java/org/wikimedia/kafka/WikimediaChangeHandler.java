@@ -6,10 +6,13 @@ import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+/*
+* implements EventHandler and adds a KafkaProducer object and topic to read from Wikimedia
+* recent changes stream and send to a specified Kafka topic when receiving messages
+* */
 public class WikimediaChangeHandler implements EventHandler {
-    private KafkaProducer<String, String> kafkaProducer;
-    private String topic;
+    private final KafkaProducer<String, String> kafkaProducer;
+    private final String topic;
     private final Logger log = LoggerFactory.getLogger(WikimediaChangeHandler.class.getSimpleName());
 
     public WikimediaChangeHandler(KafkaProducer<String, String> kp, String topic){
@@ -29,7 +32,9 @@ public class WikimediaChangeHandler implements EventHandler {
 
     @Override
     public void onMessage(String event, MessageEvent messageEvent){
+        // log event data
         log.info(messageEvent.getData());
+        // send to Kafka topic
         kafkaProducer.send(new ProducerRecord<>(topic, messageEvent.getData()));
     }
 
