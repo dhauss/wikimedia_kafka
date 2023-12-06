@@ -5,10 +5,10 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 /*
- KafkaConfig has one constructor which takes a filepath that should reference a Kafka config file.
- Constructor parses the lines in the file and creates 4 private variables: bootstrapServer,
- saslMechanism, securityProtocol, and saslJaasConfig. These can then be used to create a Kafka
- client without exposing sensitive data in plain text (e.g. on this public Github repo)
+ * KafkaConfig has one constructor which takes a filepath that should reference a Kafka config file.
+ * Constructor parses the lines in the file and creates 4 private variables: bootstrapServer,
+ * saslMechanism, securityProtocol, and saslJaasConfig. These can then be used to create a Kafka
+ * client without exposing sensitive data in plain text (e.g. on this public Github repo)
  */
 public class KafkaConfig {
     private String bootstrapServer;
