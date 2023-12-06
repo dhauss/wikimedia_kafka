@@ -8,7 +8,10 @@ import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.clients.producer.RecordMetadata;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+/*
+* Set up for testing KafkaConfig class, sends to topic and receives/logs metadata
+* on successful write
+ */
 public class TestProducer {
         private static final Logger log = LoggerFactory.getLogger(TestProducer.class.getSimpleName());
 
