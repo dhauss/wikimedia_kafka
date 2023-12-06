@@ -12,7 +12,6 @@ public class WikimediaChangesProducer {
     public static void main(String[] args) throws InterruptedException {
         //  connect to upstash server
         var props = new Properties();
-
         // custom class for reading in data from Kafka config file
         KafkaConfig kc = new KafkaConfig("src/main/resources/config.txt");
 
@@ -23,10 +22,10 @@ public class WikimediaChangesProducer {
         props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
         props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
 
-        //  create producer
+        //  create producer, define topic and secondsToSleep
         KafkaProducer<String, String> producer = new KafkaProducer<>(props);
-
         String topic = "wikimedia.recentchange";
+        int secondsToSleep = 5;
 
         EventHandler eventHandler = new WikimediaChangeHandler(producer, topic);
         String url = "https://stream.wikimedia.org/v2/stream/recentchange";
@@ -37,7 +36,6 @@ public class WikimediaChangesProducer {
         eventSource.start();
 
         // produce for secondsToSleep seconds before terminating program
-        int secondsToSleep = 5;
         TimeUnit.SECONDS.sleep(secondsToSleep);
     }
 }
