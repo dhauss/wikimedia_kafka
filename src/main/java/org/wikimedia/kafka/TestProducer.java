@@ -9,8 +9,8 @@ import org.apache.kafka.clients.producer.RecordMetadata;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class testProducer {
-        private static final Logger log = LoggerFactory.getLogger(testProducer.class.getSimpleName());
+public class TestProducer {
+        private static final Logger log = LoggerFactory.getLogger(TestProducer.class.getSimpleName());
 
         public static void main(String[] args) {
             //  connect to upstash server
@@ -20,7 +20,7 @@ public class testProducer {
             props.put("bootstrap.servers", kc.getBootstrapServer());
             props.put("sasl.mechanism", kc.getSaslMechanism());
             props.put("security.protocol", kc.getSecurityProtocol());
-            props.put("sasl.jaas.config", kc.getSaslJassConfig());
+            props.put("sasl.jaas.config", kc.getSaslJaasConfig());
             props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
             props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
 
