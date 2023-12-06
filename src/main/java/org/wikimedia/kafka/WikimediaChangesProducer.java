@@ -28,11 +28,11 @@ public class WikimediaChangesProducer {
         //  create producer, define topic and secondsToSleep
         KafkaProducer<String, String> producer = new KafkaProducer<>(props);
         String topic = "wikimedia.recentchange";
+        String url = "https://stream.wikimedia.org/v2/stream/recentchange";
         int secondsToSleep = 5;
 
         // create event handler for reading recent changes stream from wikimedia
         EventHandler eventHandler = new WikimediaChangeHandler(producer, topic);
-        String url = "https://stream.wikimedia.org/v2/stream/recentchange";
         EventSource.Builder builder = new EventSource.Builder(eventHandler, URI.create(url));
         EventSource eventSource = builder.build();
 
