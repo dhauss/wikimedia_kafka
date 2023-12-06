@@ -10,11 +10,11 @@ import java.util.concurrent.TimeUnit;
 
 public class WikimediaChangesProducer {
     public static void main(String[] args) throws InterruptedException {
-        //  connect to upstash server
-        var props = new Properties();
         // custom class for reading in data from Kafka config file
         KafkaConfig kc = new KafkaConfig("src/main/resources/config.txt");
 
+        //  define properties for connecting to Kafka cluster
+        var props = new Properties();
         props.put("bootstrap.servers", kc.getBootstrapServer());
         props.put("sasl.mechanism", kc.getSaslMechanism());
         props.put("security.protocol", kc.getSecurityProtocol());
@@ -27,12 +27,13 @@ public class WikimediaChangesProducer {
         String topic = "wikimedia.recentchange";
         int secondsToSleep = 5;
 
+        // create event handler for reading recent changes stream from wikimedia
         EventHandler eventHandler = new WikimediaChangeHandler(producer, topic);
         String url = "https://stream.wikimedia.org/v2/stream/recentchange";
         EventSource.Builder builder = new EventSource.Builder(eventHandler, URI.create(url));
         EventSource eventSource = builder.build();
 
-        // start producer in different thread
+        // start eventSource in different thread, producer sends messages through WikimediaChangeHandler
         eventSource.start();
 
         // produce for secondsToSleep seconds before terminating program
