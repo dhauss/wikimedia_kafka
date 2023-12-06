@@ -49,10 +49,6 @@ public class KafkaConfig {
         }
     }
 
-    public static void main(String[] args) {
-        KafkaConfig kc = new KafkaConfig("src/main/resources/config.txt");
-    }
-
     public void setBootstrapServer(String bootstrapServer) {
         this.bootstrapServer = bootstrapServer;
     }
