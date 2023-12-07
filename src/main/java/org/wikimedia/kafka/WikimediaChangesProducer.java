@@ -3,6 +3,7 @@ package org.wikimedia.kafka;
 import com.launchdarkly.eventsource.EventHandler;
 import com.launchdarkly.eventsource.EventSource;
 import org.apache.kafka.clients.producer.KafkaProducer;
+import org.apache.kafka.clients.producer.ProducerConfig;
 
 import java.net.URI;
 import java.util.Properties;
@@ -30,6 +31,8 @@ public class WikimediaChangesProducer {
 
         props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
         props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+        // set file compression in producer end for efficient batch processing
+        props.put(ProducerConfig.COMPRESSION_TYPE_CONFIG, "lz4");
 
         //  create producer, define topic and secondsToSleep
         KafkaProducer<String, String> producer = new KafkaProducer<>(props);
