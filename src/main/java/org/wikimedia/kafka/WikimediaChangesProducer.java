@@ -31,7 +31,7 @@ public class WikimediaChangesProducer {
 
         props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
         props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
-        // set file compression in producer end for efficient batch processing
+        // set file compression in producer for efficient batch processing
         props.put(ProducerConfig.COMPRESSION_TYPE_CONFIG, "lz4");
 
         //  create producer, define topic and secondsToSleep
