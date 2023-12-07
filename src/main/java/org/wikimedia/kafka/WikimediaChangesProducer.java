@@ -32,8 +32,8 @@ public class WikimediaChangesProducer {
         props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
         props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
 
-        // set file compression in producer for efficient batch processing, increase linger and batch size
-        // to send larger compressed messages
+        // set file compression in producer for efficient batch processing, increase linger  to 20ms
+        // and batch size to 32kb to send larger compressed messages
         props.put(ProducerConfig.COMPRESSION_TYPE_CONFIG, "lz4");
         props.put(ProducerConfig.LINGER_MS_CONFIG, 20);
         props.put(ProducerConfig.BATCH_SIZE_CONFIG, Integer.toString(32*1024));
