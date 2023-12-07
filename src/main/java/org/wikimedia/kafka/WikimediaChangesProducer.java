@@ -34,7 +34,7 @@ public class WikimediaChangesProducer {
 
         // set file compression in producer for efficient batch processing, increase linger  to 20ms
         // and batch size to 32kb to send larger compressed messages
-        props.put(ProducerConfig.COMPRESSION_TYPE_CONFIG, "lz4");
+        props.put(ProducerConfig.COMPRESSION_TYPE_CONFIG, "snappy");
         props.put(ProducerConfig.LINGER_MS_CONFIG, 20);
         props.put(ProducerConfig.BATCH_SIZE_CONFIG, Integer.toString(32*1024));
 
